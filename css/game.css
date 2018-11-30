@@ -1,5 +1,6 @@
 #game .game {
     margin-top: 73px;
+    background-color: CornFlowerblue;
 }
 
 #game .game .card {
@@ -8,7 +9,9 @@
     float: left;
     width: 100px;
     height: 150px;
-    cursor: pointer;
+    cursor: pointer
+    color:white;
+
 }
 
 #game .game .card:hover {
@@ -18,6 +21,7 @@
 #game .game .cardlist {
     text-align: justify;
     margin-bottom: 25px;
+
 }
 
 #game .game .cardlist .card {
