@@ -11,7 +11,7 @@
     height: 150px;
     cursor: pointer
     color:white;
-
+    background-image: url("../img/card.jpeg")
 }
 
 #game .game .card:hover {
