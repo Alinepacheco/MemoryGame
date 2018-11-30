@@ -1,1 +1,37 @@
-/* nya */
+#game .game {
+    margin-top: 73px;
+}
+
+#game .game .card {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 100px;
+    height: 150px;
+    cursor: pointer;
+}
+
+#game .game .card:hover {
+    border: 1px solid #777;
+}
+
+#game .game .cardlist {
+    text-align: justify;
+    margin-bottom: 25px;
+}
+
+#game .game .cardlist .card {
+    display: inline-block;
+}
+
+#game .game .cardlist:after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+    height: 0;
+}
+
+#game .navbar-btn {
+    margin-right: 25px;
+    margin-left: 15px;
+}

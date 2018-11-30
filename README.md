@@ -1,4 +1,4 @@
-# MemoryGame
+# Memory Game
 
 Joguinho da memória feito em javascript.
 
