@@ -133,7 +133,24 @@ const memoryGame = {
     check: function(done) {
 
         // Aqui a gente vai obter o número de quantas cartas restam no jogo
-        var countCards = gens.body.find(".cardlist").children().length;
+        var countCards = 0;
+        var deletingCards = [];
+        gens.body.find(".cardlist").children().each(function() {
+            if ($(this).hasClass("complete") != true) {
+                countCards++;
+                deletingCards = [];
+            } else if (countCards == 0) {
+                $(this).remove();
+            } else {
+                deletingCards.push($(this));
+            }
+        });
+
+        for (var i = 0; i < deletingCards.length; i++) {
+            deletingCards[i].remove();
+        }
+
+        delete deletingCards;
 
         // Este é o marcador total de cliques
         memoryGame.database.sameClick++;
@@ -234,6 +251,14 @@ const memoryGame = {
         // Aqui fica registrado o temporizador de carta visivel
         timeout: null,
 
+        fadeOut: function() {
+
+            $(this).addClass("complete").children().each(function() {
+                $(this).remove();
+            });
+
+        },
+
         // Aqui é a função
         action: function() {
 
@@ -245,23 +270,27 @@ const memoryGame = {
             ) {
 
                 // Vamos remover as duas cartas do jogo
-                memoryGame.selected.c1.remove();
-                memoryGame.selected.c2.remove();
-
-                // Devolvemos o valor null para os slots
-                memoryGame.selected.c1 = null;
-                memoryGame.selected.c2 = null;
+                memoryGame.selected.c1.fadeOut(400, memoryGame.detector.fadeOut);
+                memoryGame.selected.c2.fadeOut(400, memoryGame.detector.fadeOut);
 
                 // E depois checar se ainda a partida vai continuar ou terminar
-                memoryGame.check(true);
+                setTimeout(function() {
+
+                    // Devolvemos o valor null para os slots
+                    memoryGame.selected.c1 = null;
+                    memoryGame.selected.c2 = null;
+
+                    memoryGame.check(true);
+
+                }, 500);
 
             }
 
             // Não? Então volta tudo...
             else {
 
-                if (memoryGame.selected.c1 != null) { memoryGame.selected.c1.css("background-image", ""); }
-                if (memoryGame.selected.c2 != null) { memoryGame.selected.c2.css("background-image", ""); }
+                if (memoryGame.selected.c1 != null) { memoryGame.selected.c1.flip(false); }
+                if (memoryGame.selected.c2 != null) { memoryGame.selected.c2.flip(false); }
                 memoryGame.selected.c1 = null;
                 memoryGame.selected.c2 = null;
 
@@ -293,7 +322,7 @@ const memoryGame = {
 
             // Agora podemos colocar ela em um dos slotes e mostrar
             if ((memoryGame.selected.c1 == null) || (memoryGame.selected.c2 == null)) {
-                $(this).css("background-image", "url('./cards/" + $(this).data("tinycard") + ".jpeg')");
+                $(this).flip(true);
             }
 
             if (memoryGame.selected.c1 == null) {
@@ -338,7 +367,7 @@ const memoryGame = {
                 memoryGame.detector.action();
             } else {
 
-                $(this).css("background-image", "");
+                $(this).flip(false);
 
                 if (memoryGame.selected.c1.data("tinyposition") == $(this).data("tinyposition")) {
                     memoryGame.selected.c1 = null;
@@ -383,7 +412,12 @@ const memoryGame = {
         // Vamos começat a gerar as cartas aqui. Cada carta vai ter sua ID salva dentro de si em uma variavel chamada tinycard
         for (var i = 0; i < data.cards.length; i++) {
             memoryGame.cards.push(
-                $("<div>", { class: "card" }).data("tinyposition", i).data("tinycard", data.cards[i]).click(memoryGame.click)
+                $("<div>", { class: "card" }).data("tinyposition", i).data("tinycard", data.cards[i]).append(
+                    $("<div>", { class: "front" }),
+                    $("<div>", { class: "back" }).css("background-image", "url('./cards/" + data.cards[i] + ".jpeg')")
+                ).click(memoryGame.click).flip({
+                    trigger: 'manual'
+                })
             );
         }
 

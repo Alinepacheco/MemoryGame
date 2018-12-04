@@ -1,5 +1,6 @@
 #game .game {
     margin-top: 73px;
+    background-color: CornFlowerblue;
 }
 
 #game .game .card {
@@ -9,6 +10,16 @@
     width: 100px;
     height: 150px;
     cursor: pointer;
+    color: white;
+    display: block !important;
+}
+
+#game .game .card.complete {
+    pointer-events: none !important;
+}
+
+#game .game .card .front {
+    background-image: url("../img/card.jpeg")
 }
 
 #game .game .card:hover {
