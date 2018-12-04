@@ -27,8 +27,26 @@ const tinyCredits = function() {
                     // Yasmin
                     $("<tr>").append(
                         $("<td>").text("Yasmin Seidel"),
-                        $("<td>").text("Ajudou a transformar a ideia do trabalho em projeto e desenvolveu o sistema base")
-                    )
+                        $("<td>").text("Ajudou a transformar a ideia do trabalho em projeto e desenvolveu o sistema base.")
+                    ),
+                    $("<tr>").append(
+                        $("<td>").text("Aline Pacheco"),
+                        $("<td>").text("Responsavel pelas fontes e cores do projeto.")
+                    ),
+                    $("<tr>").append(
+                        $("<td>").text("Rodrigo Garcia"),
+                        $("<td>").text("Desenvolveu a logo do projeto.")
+                    ),
+                    $("<tr>").append(
+                        $("<td>").text("Bruno Nunes"),
+                        $("<td>").text("Desenvolveu o design e conteudo dos objetos (cartas).")
+                    ),
+                    $("<tr>").append(
+                        $("<td>").text("Flayner Barreto"),
+                        $("<td>").text("Desenvolveu as animações dos projetos.")
+                    ),
+
+
 
                 )
 
