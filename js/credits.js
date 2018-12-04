@@ -39,7 +39,7 @@ const tinyCredits = function() {
                     ),
                     $("<tr>").append(
                         $("<td>").text("Bruno Nunes"),
-                        $("<td>").text("Desenvolveu o design e conteudo dos objetos (cartas).")
+                        $("<td>").text("Desenvolveu o design e conteudo dos objetos.")
                     ),
                     $("<tr>").append(
                         $("<td>").text("Flayner Barreto"),
